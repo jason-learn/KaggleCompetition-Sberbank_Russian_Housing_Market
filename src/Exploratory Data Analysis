@@ -15,9 +15,9 @@ from scipy.stats import mode
 
  
 # Read data
-macro = pd.read_csv('./macro.csv')
-train = pd.read_csv('./train.csv')
-test = pd.read_csv('./test.csv')
+macro = pd.read_csv('../input/macro.csv')
+train = pd.read_csv('../input/train.csv')
+test = pd.read_csv('../input/test.csv')
 
 print(mode(train['num_room']))
 
@@ -33,7 +33,7 @@ print(train['full_sq'].describe())
 # print(train.ix[19127])
 
 
-#查询price的分布
+#查询price的分布,找出outliners
 plt.figure(figsize=(8,6))
 plt.scatter(range(train.shape[0]), np.sort(train.price_doc.values))
 plt.xlabel('index', fontsize=12)
@@ -63,7 +63,7 @@ sns.boxplot(x="floor", y="price_doc", data=train,ax=ax)
 ax.set(ylabel='Price Doc',xlabel="Floor",title="Floor Vs Price Doc")
 plt.show()
 
-#
+##找出各个floor number的数量
 plt.figure(figsize=(12,8))
 sns.countplot(x="floor", data=train)
 plt.ylabel('Count', fontsize=12)
