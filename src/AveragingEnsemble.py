@@ -63,6 +63,60 @@ bad_index = test[test.life_sq > 200].index
 test.ix[bad_index, ["life_sq", "full_sq"]] = np.NaN
 train.product_type.value_counts(normalize= True)
 test.product_type.value_counts(normalize= True)
+
+###################################################################
+
+bad_index = train[train.build_year == 20052009].index
+train.ix[bad_index, "build_year"] = 2009
+bad_index = train[train.build_year == 1691].index
+train.ix[bad_index, "build_year"] = 1961
+bad_index = train[train.build_year == 4965].index
+train.ix[bad_index, "build_year"] = 1965
+bad_index = train[train.build_year == 215].index
+train.ix[bad_index, "build_year"] = 2015
+bad_index = train[train.build_year == 2].index
+train.ix[bad_index, "build_year"] = 2014
+bad_index = train[train.build_year == 20].index
+train.ix[bad_index, "build_year"] = 2014
+# bad_index = train[train.max_floor > 57].index
+# train.ix[bad_index, 'max_floor']=np.NaN
+# bad_index = test[test.max_floor > 57].index
+# test.ix[bad_index, 'max_floor']=np.NaN
+#
+train.ix[11271, 'build_year']=2014
+train.ix[19127, 'build_year']=1960
+# bad_index = train[train.floor > 57].index
+# train.ix[bad_index, 'floor']=np.NaN
+#
+#
+bad_index=train[train.full_sq == 603].index
+train.ix[bad_index, "full_sq"] = 60
+bad_index = train[train.full_sq == 412].index
+train.ix[bad_index, "full_sq"] = 41
+bad_index = train[train.full_sq == 407].index
+train.ix[bad_index, "full_sq"] = 40
+bad_index = train[train.full_sq == 403].index
+train.ix[bad_index, "full_sq"] = 40
+bad_index = train[train.full_sq == 394].index
+train.ix[bad_index, "full_sq"] = 39
+bad_index = train[train.full_sq == 388].index
+train.ix[bad_index, "full_sq"] = 39
+bad_index = train[train.full_sq == 353].index
+train.ix[bad_index, "full_sq"] = 35
+
+
+bad_index = train[train.full_sq >250].index
+train.ix[bad_index,'full_sq']= train.ix[bad_index,'full_sq']/10
+bad_index = train[train.full_sq >1000].index
+train.ix[bad_index,'full_sq']= train.ix[bad_index,'full_sq']/100
+
+bad_index = test[test.full_sq >250].index
+test.ix[bad_index,'full_sq']= test.ix[bad_index,'full_sq']/10
+bad_index = test[test.full_sq >1000].index
+test.ix[bad_index,'full_sq']= test.ix[bad_index,'full_sq']/100
+
+
+##################################################################
 bad_index = train[train.build_year < 1500].index
 train.ix[bad_index, "build_year"] = np.NaN
 bad_index = test[test.build_year < 1500].index
