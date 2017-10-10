@@ -10,7 +10,7 @@
 #      probably by gunja agarwal (or actually by Jason Benner, it seems,
 #      but there's also a small transformation applied ot the predictions,
 #      so also probably not generalizable),
-#   This combo being run by Andy Harless on June 4
+ 
 
 import numpy as np
 import pandas as pd
