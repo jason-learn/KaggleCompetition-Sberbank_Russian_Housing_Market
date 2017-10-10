@@ -297,7 +297,7 @@ y_predict = np.round(y_predict * 0.99)
 gunja_output = pd.DataFrame({'id': id_test, 'price_doc': y_predict})
 gunja_output.head()
 
-
+##########################################################################################################################
 
 
 train = pd.read_csv('../input/train.csv')
@@ -305,7 +305,6 @@ test = pd.read_csv('../input/test.csv')
 id_test = test.id
 
 mult = .969
-
 y_train = train["price_doc"] * mult + 10
 x_train = train.drop(["id", "timestamp", "price_doc"], axis=1)
 x_test = test.drop(["id", "timestamp"], axis=1)
@@ -346,7 +345,9 @@ y_predict = model.predict(dtest)
 output = pd.DataFrame({'id': id_test, 'price_doc': y_predict})
 output.head()
 
-# Any results you write to the current directory are saved as output.
+###########################################################################################################################
+
+ 
 df_train = pd.read_csv("../input/train.csv", parse_dates=['timestamp'])
 df_test = pd.read_csv("../input/test.csv", parse_dates=['timestamp'])
 df_macro = pd.read_csv("../input/macro.csv", parse_dates=['timestamp'])
