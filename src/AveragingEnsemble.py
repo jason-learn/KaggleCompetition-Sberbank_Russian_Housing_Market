@@ -1,15 +1,8 @@
-# Mostly a lot of silliness at this point:
-#   Main contribution (50%) is based on Reynaldo's script with a linear transformation of y_train
-#      that happens to fit the public test data well
-#      and may also fit the private test data well
-#      if it reflects a macro effect
-#      but almost certainly won't generalize to later data
-#   Second contribution (20%) is based on Bruno do Amaral's very early entry but
-#      with an outlier that I deleted early in the competition
-#   Third contribution (30%) is based on a legitimate data cleaning,
-#      probably by gunja agarwal (or actually by Jason Benner, it seems,
-#      but there's also a small transformation applied ot the predictions,
-#      so also probably not generalizable),
+ 
+#   Main contribution (50%) is based on script with a linear transformation of y_train  
+#   Second contribution (20%) is based on script with an outlier that I deleted early in the competition
+#   Third contribution (30%) is based on a legitimate data cleaning
+ 
  
 
 import numpy as np
@@ -20,15 +13,15 @@ from sklearn import model_selection, preprocessing
 import xgboost as xgb
 import datetime
 
-#load files
+#load data 加载数据
 train = pd.read_csv('../input/train.csv', parse_dates=['timestamp'])
 test = pd.read_csv('../input/test.csv', parse_dates=['timestamp'])
 macro = pd.read_csv('../input/macro.csv', parse_dates=['timestamp'])
 id_test = test.id
 
 #multiplier = 0.969
-
-#clean data
+##################################feature engineering特征工程部分############################################
+#clean data 数据清洗
 bad_index = train[train.life_sq > train.full_sq].index
 train.ix[bad_index, "life_sq"] = np.NaN
 equal_index = [601,1896,2791]
@@ -297,9 +290,9 @@ y_predict = np.round(y_predict * 0.99)
 gunja_output = pd.DataFrame({'id': id_test, 'price_doc': y_predict})
 gunja_output.head()
 
-##########################################################################################################################
+#########################################################second model#################################################################
 
-
+#load data 加载数据
 train = pd.read_csv('../input/train.csv')
 test = pd.read_csv('../input/test.csv')
 id_test = test.id
@@ -345,9 +338,9 @@ y_predict = model.predict(dtest)
 output = pd.DataFrame({'id': id_test, 'price_doc': y_predict})
 output.head()
 
-###########################################################################################################################
+##########################################################third model#################################################################
 
- 
+#load data 加载数据
 df_train = pd.read_csv("../input/train.csv", parse_dates=['timestamp'])
 df_test = pd.read_csv("../input/test.csv", parse_dates=['timestamp'])
 df_macro = pd.read_csv("../input/macro.csv", parse_dates=['timestamp'])
@@ -470,6 +463,8 @@ y_pred = model.predict(dtest)
 df_sub = pd.DataFrame({'id': id_test, 'price_doc': y_pred})
 
 df_sub.head()
+
+###########################################################merge part#############################################################
 first_result = output.merge(df_sub, on="id", suffixes=['_louis','_bruno'])
 first_result["price_doc"] = np.exp( .714*np.log(first_result.price_doc_louis) +
                                     .286*np.log(first_result.price_doc_bruno) )  # multiplies out to .5 & .2
