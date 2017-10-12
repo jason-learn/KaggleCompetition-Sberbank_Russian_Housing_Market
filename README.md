@@ -1,2 +1,3 @@
 # KaggleCompetition-Sberbank_Russian_Housing_Market
 this is KaggleComprtition-Sberbank_Russian_Housing_Market
+#特征决定算法的上限，模型只是让算法无限接近这个上限！
